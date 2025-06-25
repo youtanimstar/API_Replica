@@ -8,8 +8,7 @@ const createNewApi = async (req, res) => {
       .json({ error: "Name, description, and user_id are required." });
   }
 
-
-try {
+  try {
     // const newApi = await table.createApiList(connection, { name, description, user_id });
     db.connection.query(
       "INSERT INTO api_list (name, description) VALUES (?, ?)",
@@ -19,12 +18,10 @@ try {
           console.error("Error inserting new API:", error.message);
           return res.status(500).json({ error: "Internal server error" });
         }
-        res
-          .status(201)
-          .json({
-            message: "API created successfully",
-            apiId: results.insertId,
-          });
+        res.status(201).json({
+          message: "API created successfully",
+          apiId: results.insertId,
+        });
       }
     );
   } catch (error) {
@@ -34,30 +31,28 @@ try {
 };
 
 const createNewEndpoint = async (req, res) => {
-  const { name, path } = req.body;
-  if (!name || !description) {
+  const { name, path, api_id } = req.body;
+  if (!name || !path || !api_id) {
     return res
       .status(400)
-      .json({ error: "Name and description are required." });
+      .json({ error: "Name, path, and api_id are required." });
   }
 
-
-try {
+  try {
     // const newApi = await table.createApiList(connection, { name, description, user_id });
     db.connection.query(
-      "INSERT INTO api_list (name, description) VALUES (?, ?)",
-      [name, description],
+      "INSERT INTO api_endpoints (name, path, api_id) VALUES (?, ?, ?)",
+      [name, path, api_id],
       (error, results) => {
         if (error) {
           console.error("Error inserting new API:", error.message);
           return res.status(500).json({ error: "Internal server error" });
         }
-        res
-          .status(201)
-          .json({
-            message: "API created successfully",
-            apiId: results.insertId,
-          });
+
+        res.status(201).json({
+          message: "API endpoint created successfully",
+          endpointId: results.insertId,
+        });
       }
     );
   } catch (error) {
@@ -66,8 +61,7 @@ try {
   }
 };
 
-
-
 module.exports = {
   createNewApi,
+  createNewEndpoint,
 };
