@@ -1,0 +1,4 @@
+so here the main objectives are
+1. an api to create a user
+2. an api to create a new api unique code
+3. an api to create a new api path
