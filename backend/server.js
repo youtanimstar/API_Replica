@@ -17,6 +17,7 @@ const BACKEND_URL = process.env.BACKEND_URL || `http://localhost:${PORT}`;
 
 // Import routes
 const apiRoutes = require('./routes/apiRoutes');
+const customRoutes = require('./routes/customRoutes');
 
 
 
@@ -27,6 +28,7 @@ app.get('/api', (req, res) => {
 });
 
 app.use('/api/v1', apiRoutes);
+app.use('/custom', customRoutes);
 
 
 
