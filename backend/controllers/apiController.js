@@ -11,8 +11,8 @@ const createNewApi = async (req, res) => {
 
   try {
     db.connection.query(
-      "INSERT INTO api_list (name, description) VALUES (?, ?)",
-      [name, description],
+      "INSERT INTO api_list (name, description,user_id) VALUES (?, ?, ?)",
+      [name, description, user_id],
       (error, results) => {
         if (error) {
           console.error("Error inserting new API:", error.message);
