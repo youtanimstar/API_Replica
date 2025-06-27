@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@uiw/react-json-view": "^2.0.0-alpha.32",
+    "axios": "^1.10.0",
+    "json-edit-react": "^1.27.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.2"

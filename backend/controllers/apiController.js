@@ -1,6 +1,34 @@
 const db = require("../config/db");
 const { generateData } = require("../utils/generateData");
 
+// Get All APIs for a User
+const getAllApis = async (req, res) => {
+  const { user_id } = req.body;
+  if (!user_id) {
+    return res.status(400).json({ error: "user_id is required." });
+  }
+  try {
+    db.connection.query(
+      "SELECT * FROM api_list WHERE user_id = ?",
+      [user_id],
+      (error, results) => {
+        if (error) {
+          console.error("Error fetching APIs:", error.message);
+          return res.status(500).json({ error: "Internal server error" });
+        }
+        if (results.length === 0) {
+          return res.status(200).json({ error: "No APIs found for this user."
+        });
+        }
+        res.status(200).json(results);
+      }
+    );
+  } catch (error) {
+    console.error("Error fetching APIs:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 // Create New API on the Database
 const createNewApi = async (req, res) => {
   const { name, description, user_id } = req.body;
@@ -102,6 +130,31 @@ const deleteNewApi = async (req, res) => {
   }
 };
 
+const getAllEndpoints = async (req, res) => {
+  const { api_id } = req.body;
+  if (!api_id) {
+    return res.status(400).json({ error: "api_id is required." });
+  }
+  try {
+    db.connection.query(
+      "SELECT * FROM api_endpoints WHERE api_id = ?",
+      [api_id],
+      (error, results) => {
+        if (error) {
+          console.error("Error fetching endpoints:", error.message);
+          return res.status(500).json({ error: "Internal server error" });
+        }
+        if (results.length === 0) {
+          return res.status(200).json({ error: "No endpoints found for this API." });
+        }
+        res.status(200).json(results);
+      }
+    );
+  } catch (error) {
+    console.error("Error fetching endpoints:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 // Create New Endpoint for the API
 const createNewEndpoint = async (req, res) => {
   const { path, api_id } = req.body;
@@ -120,7 +173,7 @@ const createNewEndpoint = async (req, res) => {
       (error, results) => {
         if (error) {
           console.error("Error inserting new API:", error.message);
-          return res.status(500).json({ error: "Internal server error" });
+          return res.status(500).json({ error: "Internal server error", message: error.message });
         }
 
         res.status(201).json({
@@ -131,7 +184,7 @@ const createNewEndpoint = async (req, res) => {
     );
   } catch (error) {
     console.error("Error creating API:", error.message);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error", message: error.message });
   }
 };
 
@@ -208,11 +261,11 @@ const deleteNewEndpoint = async (req, res) => {
 
 // Add Data to Endpoint
 const addDataToEndpoint = async (req, res) => {
-  const { path, api_id, format, type, method } = req.body;
-  if (!path || !api_id || !format || !type || !method) {
+  const { path,newPath, api_id, format, type, method } = req.body;
+  if (!path ||!newPath || !api_id || !format || !type || !method) {
     return res
       .status(400)
-      .json({ error: "path, api_id, type and format are required." });
+      .json({ error: "path, newPath api_id, type and format are required." });
   }
 
   try {
@@ -229,8 +282,8 @@ const addDataToEndpoint = async (req, res) => {
     const data = generateData(format, type);
 
     db.connection.query(
-      "UPDATE api_endpoints SET data_ = ?, method = ? WHERE path = ? AND api_id = ?",
-      [data, method, path, api_id],
+      "UPDATE api_endpoints SET data_ = ?, method = ?, path=? WHERE path = ? AND api_id = ?",
+      [data, method,newPath, path, api_id],
       (error, results) => {
         if (error) {
           console.error("Error updating API endpoint data:", error.message);
@@ -248,10 +301,13 @@ const addDataToEndpoint = async (req, res) => {
 };
 
 module.exports = {
+  getAllApis,
+
   createNewApi,
   updateNewApi,
   deleteNewApi,
 
+  getAllEndpoints,
   createNewEndpoint,
   updateNewEndpoint,
   deleteNewEndpoint,

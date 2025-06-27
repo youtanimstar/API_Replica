@@ -1,13 +1,16 @@
 import React from "react";
 
-const Card = ({title,description}) => {
+import Menu from "./Menu";
+import { Link } from "react-router-dom";
+
+const Card = ({ title, description, apiId, ...props }) => {
   return (
-    <div className="card">
-      <h2 className="cardTitle">{title}</h2>
-      <p className="cardDescription">
-        {description}
-      </p>
-    </div>
+    <Link to={`/edit/${apiId}/${title}`} className="no-underline">
+      <div className="card" {...props}>
+        <h2 className="cardTitle">{title}</h2>
+        <p className="cardDescription">{description}</p>
+      </div>
+    </Link>
   );
 };
 

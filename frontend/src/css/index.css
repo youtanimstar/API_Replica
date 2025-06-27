@@ -17,60 +17,59 @@ body {
   text-fill-color: transparent;
 }
 
-.cardContainer{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 20px;
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    flex-wrap: wrap;
-    transition: all 0.3s ease;
-    
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-wrap: wrap;
+  transition: all 0.3s ease;
 }
-.card{
-    padding: 30px;
-    gap: 15px;
-    background-color: white;
-    width: 320px;
-    min-height: 200px;
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    flex-direction: column;
-    border-radius: 20px;
-    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.068);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(209, 213, 219, 0.5); /* Gray-300 with 50% opacity */
-    cursor: pointer;
-
+.card {
+  padding: 30px;
+  gap: 15px;
+  background-color: white;
+  width: 320px;
+  min-height: 200px;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  border-radius: 20px;
+  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.068);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(209, 213, 219, 0.5); /* Gray-300 with 50% opacity */
+  cursor: pointer;
 }
 .card:hover {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px) scale(1.02);
-    border-color: #8b5cf6; /* Purple-600 */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px) scale(1.02);
+  border-color: #8b5cf6; /* Purple-600 */
 }
 
-.cardTitle{
-    font-size: 25px;
-    font-weight: 700;
+.cardTitle {
+  font-size: 25px;
+  font-weight: 700;
 }
 
-.cardDescription{
-    font-size: 16px;
-    color: #6b7280; /* Gray-500 */
-    margin-top: 10px;
+.cardDescription {
+  font-size: 16px;
+  color: #6b7280; /* Gray-500 */
+  margin-top: 10px;
 }
 
-.textarea_home{
-    height: 80px;
+.textarea_home {
+  height: 80px;
 }
 
 .loader {
   display: inline-block;
   vertical-align: middle;
   margin-left: 10px;
+  margin-right: 10px;
   /* display: none; */
 }
 
@@ -84,18 +83,16 @@ body {
   stroke-dashoffset: 0;
   animation: dash 1.5s ease-in-out infinite;
 }
-.homeLoader .path{
-    stroke: #8b5cf6; /* Purple-600 */
-    stroke-width: 4;
+.homeLoader .path {
+  stroke: #8b5cf6; /* Purple-600 */
+  stroke-width: 4;
 }
-.mainLoadingContainer
-{
-    width: 100%;
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+.mainLoadingContainer {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 @keyframes rotate {
   100% {
@@ -117,11 +114,21 @@ body {
   }
 }
 
-.modalButton{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
+.modalButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
+.focus-ring-purple:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-color: #8b5cf6;
+  box-shadow: 0 0 0 2px var(--tw-ring-color);
+}
 
+.endpointLoader .path{
+  stroke-width: 3;
+  stroke: #8b5cf6; /* Purple-600 */
+}

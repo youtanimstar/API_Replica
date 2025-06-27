@@ -3,6 +3,11 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
+
+// Middleware for CORS
+const cors = require('cors');
+app.use(cors());
+
 // Load environment variables from .env file
 const dotenv = require('dotenv');
 dotenv.config();
@@ -22,12 +27,13 @@ const customRoutes = require('./routes/customRoutes');
 
 
 
+
 // Sample route
 app.get('/api', (req, res) => {
   res.json({ message: 'Hello from the backend!' });
 });
 
-app.use('/api/v1', apiRoutes);
+app.use('/v1', apiRoutes);
 app.use('/custom', customRoutes);
 
 
