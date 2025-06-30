@@ -32,6 +32,7 @@ app.get("/", (req, res) => {
 }
 );
 
+
 // Sample route
 app.get('/api', (req, res) => {
   res.json({ message: 'Hello from the backend!' });
