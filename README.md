@@ -165,7 +165,7 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 ## 👨‍💻 Developer
 
 <div align="center">
-  <img src="https://avatars.githubusercontent.com/u/107903218?v=4" alt="Deep Das" width="150" height="150" style="border-radius: 50%;">
+  <img src="https://avatars.githubusercontent.com/u/107903218?v=4" alt="Deep Das" width="150" height="150" style="border-radius: 50% !important;">
   
   ### **Deep Das**
   *Full Stack Developer & Designer*
