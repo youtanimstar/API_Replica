@@ -27,6 +27,10 @@ const customRoutes = require('./routes/customRoutes');
 
 
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the backend server of API REPLICA!");
+}
+);
 
 // Sample route
 app.get('/api', (req, res) => {
